@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import InventoryItem from './InventoryItem';
 import axios from 'axios';
+import InventorySumary from './InventorySumary';
+
 // import Moment from 'react-moment';
 // import moment from 'moment';
 
@@ -34,19 +36,33 @@ export default class InventoryList extends Component {
         })
     }
     inventoryList() {
+        //console.log(this.state.inventories)
         return this.state.inventories.map(curentInventory => {
-            return <InventoryItem inventory={curentInventory} deleteInventory={this.deleteInventory} key={curentInventory._id} />
+            return <InventoryItem inventories={this.state.inventories} inventory={curentInventory} deleteInventory={this.deleteInventory} key={curentInventory._id} />
         })
     }
+
+    // totInventoryAndtotExp = ()=>{
+
+    // }
     render() {
 
         return (
             <div>
-                {/* <InventoryItem inventoryListA={this.inventoryList()} /> */}
-                {/* <InventoryItem inventoryListA={this.state.inventories}/> */}
-                {this.inventoryList()}
+                <div className="row">
+                    <div className="col-sm-12 col-md-6">
+
+                        <InventorySumary inventories={this.state.inventories} />
+                    </div>
+                    <div className="col-sm-12 col-md-6">
+                        {this.inventoryList()}
+                    </div>
+
+                </div>
 
             </div>
+
+
 
         )
     }

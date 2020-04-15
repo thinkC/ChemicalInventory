@@ -183,11 +183,11 @@ export default class CreateInventory extends Component {
                                 <input type="number" className="form-control" id="RequestedQuantity" onChange={this.onChangeRequestedQuantity} value={this.state.requestedquantity} />
 
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label htmlFor="TotalRemaining">TotalRemaining</label>
                                 <input type="number" className="form-control" id="TotalRemaining" onChange={this.onChangeTotalRemaining} value={this.state.totalremaining} />
 
-                            </div>
+                            </div> */}
                             <div className="form-group">
                                 <label htmlFor="Country">Country</label>
                                 <input type="text" className="form-control" id="Country" onChange={this.onChangeCountry} value={this.state.country} />

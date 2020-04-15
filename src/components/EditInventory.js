@@ -73,6 +73,12 @@ export default class EditInventory extends Component {
     //         console.log(error);
     //       })
 
+    // calTotal = (a, b) => {
+    //     //return parseInt(a) - parseInt(b)
+    //     return parseInt(a - b)
+    // }
+
+
     onChangeInventoryName(e) {
         this.setState({
             inventoryname: e.target.value
@@ -115,9 +121,19 @@ export default class EditInventory extends Component {
         });
     }
 
+    // onChangeRequestedQuantity = (e) => {
+    //     e.persist();
+    //     this.setState(() => {
+    //         return { requestedquantity: e.target.value }
+    //     }, () => {
+    //         this.calTotal()
+    //     })
+    // }
+
     onChangeTotalRemaining(e) {
         this.setState({
             totalremaining: e.target.value
+
         });
     }
 
@@ -133,8 +149,33 @@ export default class EditInventory extends Component {
         });
     }
 
+
+    calTotal = () => {
+        let totalRemaining = parseInt(this.state.initialquantity) - parseInt(this.state.requestedquantity);
+        let tempInventories = { ...this.state };
+        tempInventories.totalremaining = totalRemaining;
+        tempInventories.initialquantity = totalRemaining;
+        tempInventories.requestedquantity = '';
+        console.log(tempInventories)
+        this.state = tempInventories
+        this.setState(() => {
+            // return {
+            //     totalremaining: totalRemaining,
+            //     initialquantity: totalRemaining,
+            //     requestedquantity: ''
+            // }
+            return {
+                state: this.state
+            }
+        })
+
+    }
+
+
     onSubmit(e) {
         e.preventDefault();
+        this.calTotal();
+        console.log(this.state)
         const inventory = {
             inventoryname: this.state.inventoryname,
             inventorycode: this.state.inventorycode,
@@ -223,6 +264,7 @@ export default class EditInventory extends Component {
                             <div className="form-group">
                                 <label htmlFor="TotalRemaining">TotalRemaining</label>
                                 <input type="number" className="form-control" id="TotalRemaining" onChange={this.onChangeTotalRemaining} value={this.state.totalremaining} />
+
 
                             </div>
                             <div className="form-group">
